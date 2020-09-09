@@ -1,18 +1,19 @@
 # RonChang
->Personal hands on toolkits.
+### What is this?
+This is my personal hands-on develop toolkits.
+|name|popurse|
+|-|-|
+|Timer|colorful and expandable timer|
 
-- install
-
+### How to install?
 ```bash
 pip install ronchang
 ```
 
-1. # Timer
-## - How to use
-- import
+## 1. Timer
+#### - import
 ```python
 from ronchang import Timer
-
 Timer(
     interval,  # unit: seconds
     start=None,
@@ -21,11 +22,9 @@ Timer(
     **kwargs
 )
 ```
-
-- demonstration
+#### - demonstration
 ```python
 from ronchang import Demo
-
 Demo.Timer()
 ```
 
