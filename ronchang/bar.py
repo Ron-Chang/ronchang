@@ -85,11 +85,3 @@ class Bar:
         if self.proceed_rate == 100:
             print('')
 
-if __name__ == '__main__':
-    import time
-    amount = 147
-    demo = '[THIS IS A DEMONSTRATION]'
-    for count in range(1, amount+1):
-        desc = f'{demo} | {count} of {amount}'
-        ProgressBar(count=count, amount=amount, desc=desc, info='test')
-        time.sleep(0.01)

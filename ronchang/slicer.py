@@ -34,13 +34,15 @@ class Slicer:
 
     @staticmethod
     def _proceed_dict(input_data, slice_length):
+        result = list()
         temp = dict()
         for index, (tier_id, info) in enumerate(input_data.items(), start=1):
             temp.update({str(tier_id): info})
             if index % slice_length == 0:
                 result.append(temp.copy())
                 temp.clear()
-        result.append(temp.copy())
+        if temp:
+            result.append(temp)
         return result
 
     @staticmethod

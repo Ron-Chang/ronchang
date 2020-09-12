@@ -18,6 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import time
+from pprint import pprint
 
 from .timer import Timer
 from .slicer import Slicer
@@ -25,31 +26,31 @@ from .bar import Bar
 
 
 class Demo:
-    """
-    @Timer.interval(minutes=1)
-    def demo_timer(interval):
-        start = time.time()
-        foo = 3
-        while True:
-            try:
-                print('Do something here')
-                100 / foo
-            except Exception as e:
-                foo = 3
-                Timer(interval=interval, start=start, is_error=True, exception=e)
-                continue
-            foo -= 1
-            Timer(interval=1, start=start, EXTRA='Extra information goes here')
-    """
 
     @classmethod
     @Timer.interval(minutes=1)
     def Timer(cls, interval):
+        """
+        @Timer.interval(minutes=1)
+        def demo_timer(interval):
+            start = time.time()
+            foo = 3
+            while True:
+                try:
+                    print('Do something here')
+                    100 / foo
+                except Exception as e:
+                    foo = 3
+                    Timer(interval=interval, start=start, is_error=True, exception=e)
+                    continue
+                foo -= 1
+                Timer(interval=1, start=start, EXTRA='Extra information goes here')
+        """
         start = time.time()
         foo = 3
         while True:
             try:
-                print(cls.__doc__)
+                print(cls.Timer.__doc__)
                 100 / foo
             except Exception as e:
                 foo = 3
@@ -58,48 +59,85 @@ class Demo:
             foo -= 1
             Timer(interval=1, start=start, EXTRA='Extra information goes here')
 
-    # @classmethod
-    # def Slicer(cls, **kwargs):
-        # if 'input_data' in kwargs and isinstance(kwargs['input_data'], list):
-            # method = getattr(ContainerSlicer, 'split_list')
-            # src = kwargs['input_data']
-        # elif 'input_data' in kwargs and isinstance(kwargs['input_data'], dict):
-            # method = getattr(ContainerSlicer, 'split_dict')
-            # src = kwargs['input_data']
-        # elif 'number' in kwargs and type(kwargs['number']) in [str, int]:
-            # method = getattr(ContainerSlicer, 'split_number')
-            # src = kwargs['number']
-        # else:
-            # raise ValueError(f'Invalid type or error input! {kwargs}')
-        # results = method(**kwargs)
-        # print(f'{"":=^90}')
-        # print(f'Input:\n\t{src}')
-        # print(f'Results:\n\t{results}')
-        # print(f'Amount: {len(results)}')
-        # print(f'{"":-^90}')
-        # for index, result in enumerate(results):
-            # print(f'slice {index} | len == {len(result)} | {result}')
-        # print(f'{"":=^90}')
+    @classmethod
+    def Slicer(cls):
+        """
+        demo_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        data_1 = Slicer.list(input_data=demo_1, container_length=5)
+        print('data_1:')
+        pprint(data_1)
 
-    # ## ################## Demo a: split list  ################## ##
-    # demo(input_data=[[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]], slice_length=4)
-    # ## ################## Demo a: split list  ################## ##
+        demo_2 = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+        data_2 = Slicer.list(input_data=demo_2, slice_length=4)
+        print('data_2:')
+        pprint(data_2)
 
-    # ## ################## Demo b: split dict  ################## ##
-    # input_data = {
-        # '1': {'name': 'Ajax', 'age': 25},
-        # '2': {'name': 'Roni', 'age': 29},
-        # '3': {'name': 'Jeffrey', 'age': 34},
-        # '4': {'name': 'Josh', 'age': 33},
-        # '5': {'name': 'Kevin', 'age': 26},
-        # '6': {'name': 'Jeque', 'age': 23},
-        # '7': {'name': 'Amy', 'age': 32},
-        # '8': {'name': 'May', 'age': 49},
-        # '9': {'name': 'Ronnie', 'age': 22},
-    # }
-    # demo(input_data=input_data, slice_length=2)
-    # ## ################## Demo b: split dict  ################## ##
+        demo_3 = {
+            '1': {'name': 'Ajax', 'age': 25},
+            '2': {'name': 'Roni', 'age': 29},
+            '3': {'name': 'Jeffrey', 'age': 34},
+            '4': {'name': 'Josh', 'age': 33},
+            '5': {'name': 'Kevin', 'age': 26},
+            '6': {'name': 'Jeque', 'age': 23},
+            '7': {'name': 'Amy', 'age': 32},
+            '8': {'name': 'May', 'age': 49},
+            '9': {'name': 'Ronnie', 'age': 22},
+        }
+        data_3 = Slicer.dict(input_data=demo_3, slice_length=2)
+        print('data_3:')
+        pprint(data_3)
 
-    # ## ################## Demo c: split a number ################## ##
-    # demo(number=40, slice_length=7)
-    # ## ################## Demo c: split a number ################## ##
+        demo_4 = 40
+        data_4 = Slicer.number(number=demo_4, slice_length=7)
+        print('data_4:')
+        pprint(data_4)
+        """
+        print(cls.Slicer.__doc__)
+        demo_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        data_1 = Slicer.list(input_data=demo_1, container_length=5)
+        print('data_1:')
+        pprint(data_1)
+
+        demo_2 = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+        data_2 = Slicer.list(input_data=demo_2, slice_length=4)
+        print('data_2:')
+        pprint(data_2)
+
+        demo_3 = {
+            '1': {'name': 'Ajax', 'age': 25},
+            '2': {'name': 'Roni', 'age': 29},
+            '3': {'name': 'Jeffrey', 'age': 34},
+            '4': {'name': 'Josh', 'age': 33},
+            '5': {'name': 'Kevin', 'age': 26},
+            '6': {'name': 'Jeque', 'age': 23},
+            '7': {'name': 'Amy', 'age': 32},
+            '8': {'name': 'May', 'age': 49},
+            '9': {'name': 'Ronnie', 'age': 22},
+        }
+        data_3 = Slicer.dict(input_data=demo_3, slice_length=2)
+        print('data_3:')
+        pprint(data_3)
+
+        demo_4 = 40
+        data_4 = Slicer.number(number=demo_4, slice_length=7)
+        print('data_4:')
+        pprint(data_4)
+
+    @classmethod
+    def Bar(cls):
+        """
+        amount = 147
+        demo = '[THIS IS A DEMONSTRATION]'
+        for count in range(1, amount+1):
+            desc = f'{demo} | {count} of {amount}'
+            Bar(count=count, amount=amount, desc=desc, info='test')
+            time.sleep(0.01)
+        """
+        print(cls.Bar.__doc__)
+        amount = 147
+        demo = '[THIS IS A DEMONSTRATION]'
+        for count in range(1, amount+1):
+            desc = f'{demo} | {count} of {amount}'
+            Bar(count=count, amount=amount, desc=desc, info='test')
+            time.sleep(0.01)
+
