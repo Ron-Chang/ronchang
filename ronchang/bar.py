@@ -33,8 +33,8 @@ class Bar:
             raise Exception(
                 f'[{"ERROR":10}]| Invalid type of "amount": {self.amount} {type(self.amount)}')
         if self.count > self.amount:
-            print(f'[{"WARNING":10}]| "count" is greater than "amount": {self.count} > {self.amount}')
-
+            print(f'[{"ERROR":10}]| "count" is greater than "amount": {self.count} > {self.amount}')
+ 
     @staticmethod
     def _get_console_width():
         try:
