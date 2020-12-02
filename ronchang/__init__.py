@@ -22,6 +22,7 @@ from pprint import pprint
 
 from .timer import Timer
 from .slicer import Slicer
+from .parser import Parser
 from .bar import Bar
 
 
@@ -98,10 +99,20 @@ class Demo:
         print('data_1:')
         pprint(data_1)
 
-        demo_2 = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+        # demo_2 = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]
+        demo_2 = list(range(1_000_000))
+        start = time.time()
         data_2 = Slicer.list(input_data=demo_2, slice_length=4)
         print('data_2:')
-        pprint(data_2)
+        # pprint(data_2)
+        print(f'consume: {round(time.time() - start, 2)}')
+
+        start = time.time()
+        data_2_c = Slicer.clist(input_data=demo_2, slice_length=4)
+        print('data_2_c:')
+        # pprint(data_2_c)
+        print(f'consume: {round(time.time() - start, 2)}')
+        print(data_2 == data_2_c)
 
         demo_3 = {
             '1': {'name': 'Ajax', 'age': 25},

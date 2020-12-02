@@ -27,14 +27,18 @@ class Bar:
 
     def validate(self):
         if not isinstance(self.count, int):
-            raise Exception(
-                f'[{"ERROR":10}]| Invalid type of "count": {self.count} {type(self.count)}')
+            error = f'[{"ERROR":8}]| Invalid type of "count": {self.count} {type(self.count)}'
+            raise TypeError(error)
         if not isinstance(self.amount, int):
-            raise Exception(
-                f'[{"ERROR":10}]| Invalid type of "amount": {self.amount} {type(self.amount)}')
+            error = f'[{"ERROR":8}]| Invalid type of "amount": {self.amount} {type(self.amount)}'
+            raise TypeError(error)
+        if self.count == 0 or self.amount == 0:
+            error = f'[{"ERROR":8}]| count or amount cannot be 0'
+            raise ValueError(error)
         if self.count > self.amount:
-            print(f'[{"ERROR":10}]| "count" is greater than "amount": {self.count} > {self.amount}')
- 
+            warning = f'[{"WARNING":8}]| "count" is greater than "amount": {self.count} > {self.amount}'
+            print(warning)
+
     @staticmethod
     def _get_console_width():
         try:

@@ -1,3 +1,4 @@
+from .cyn.slicer import proceed_dict, proceed_list, proceed_pages
 
 
 class Slicer:
@@ -110,6 +111,20 @@ class Slicer:
             return cls._proceed_list(input_data=input_data, slice_length=slice_length)
 
     @classmethod
+    def clist(cls, input_data, slice_length=None, container_length=None, recurs=True):
+        if not input_data:
+            return list()
+        cls._validation(input_data=input_data, slice_length=slice_length, container_length=container_length)
+        if recurs:
+            input_data = cls.reduce_dimension(input_data=input_data)
+        if slice_length:
+            return proceed_list(input_data=input_data, slice_length=slice_length)
+        if container_length:
+            amount = len(input_data)
+            slice_length = cls._get_slice_length(amount=amount, container_length=container_length)
+            return proceed_list(input_data=input_data, slice_length=slice_length)
+
+    @classmethod
     def dict(cls, input_data, slice_length=None, container_length=None):
         if not input_data:
             return dict()
@@ -126,6 +141,22 @@ class Slicer:
             return cls._proceed_dict(input_data=input_data, slice_length=slice_length)
 
     @classmethod
+    def cdict(cls, input_data, slice_length=None, container_length=None):
+        if not input_data:
+            return dict()
+        cls._validation(
+            input_data=input_data,
+            slice_length=slice_length,
+            container_length=container_length
+        )
+        if slice_length:
+            return proceed_dict(input_data=input_data, slice_length=slice_length)
+        if container_length:
+            amount = len(input_data)
+            slice_length = cls._get_slice_length(amount=amount, container_length=container_length)
+            return proceed_dict(input_data=input_data, slice_length=slice_length)
+
+    @classmethod
     def number(cls, number, slice_length=None, container_length=None):
         slice_page_container = list()
         temp = list()
@@ -135,6 +166,18 @@ class Slicer:
                 return cls._proceed_pages(amount=amount, slice_length=slice_length)
             if container_length:
                 slice_length = cls._get_slice_length(amount=amount, container_length=container_length)
-                return cls._proceed_pages(input_data=amount, slice_length=slice_length)
+                return cls._proceed_pages(amount=amount, slice_length=slice_length)
         raise Exception(f'Invalid input_data type {input_data} {type(input_data)}, "int" is required!')
 
+    @classmethod
+    def cnum(cls, number, slice_length=None, container_length=None):
+        slice_page_container = list()
+        temp = list()
+        if isinstance(number, int) or (isinstance(number, str) and number.isdigit()):
+            amount = int(number)
+            if slice_length:
+                return proceed_pages(amount=amount, slice_length=slice_length)
+            if container_length:
+                slice_length = cls._get_slice_length(amount=amount, container_length=container_length)
+                return proceed_pages(amount=amount, slice_length=slice_length)
+        raise Exception(f'Invalid input_data type {input_data} {type(input_data)}, "int" is required!')
